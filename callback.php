@@ -5,10 +5,9 @@
 	
     $client_id = "22a42bccbe47470cb221d7024a2eccd9";
     $client_secret = "2c4370963ae14ae2a655fc2bb95cc171";
-    $redirect_uri = "http://localhost.sub/Ado-Project/illy WEB/illy Now/callback.php";
+    $redirect_uri = "http://localhost.sub/Ado-Project/illy-WEB/illy-Now/callback.php";
     $token_uri = 'https://api.instagram.com/oauth/access_token';
-     
-    //-----[postするデータ]
+
     $post = "client_id=".$client_id."&client_secret=".$client_secret."&grant_type=authorization_code&redirect_uri=".$redirect_uri."&code=".$_GET["code"];
      
     $ch = curl_init();
@@ -75,22 +74,16 @@
 											break;
 										}
 										
-										//echo "   key5 = ".$key5." ; val5 = ".$val5."<br>";
 									}
 								}
 							}
 						}
 					}
-					//echo "<br><hr>";
 				}
 			}
 		}
 	}
 }
-
-//postのやりかたは不明
-//$posttest = file_get_contents("http://instagr.am/api/v1/media/upload?device_timestamp=200000?lat=40.245?lng=30.557?photo=0000000000000000000000?access_token=".$instagram_access_token);
-//echo $posttest;
 
 
 // Consumer keyの値
@@ -109,7 +102,7 @@ $to = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_toke
 //$req = $to->OAuthRequest("http://api.twitter.com/1/statuses/home_timeline.xml","GET",array("count"=>"2"));
 
 // XML文字列をオブジェクトに代入する
-$xml = simplexml_load_string($req);
+//$xml = simplexml_load_string($req);
 
 /*
 echo '↓↓↓あぷせのタイムライン↓↓↓<hr>';
@@ -132,14 +125,15 @@ foreach($xml->status as $status){
 
 echo '↑↑↑あぷせのタイムライン↑↑↑<hr>';
 */
-echo '<br>↓↓↓#illyの検索結果↓↓↓<hr>';
+//echo '<br>↓↓↓#illyの検索結果↓↓↓<hr>';
 
 
-$req = $to->OAuthRequest("http://search.twitter.com/search.json?q=%23illy","GET",array("count"=>"10"));
-
+$req = $to->OAuthRequest("http://search.twitter.com/search.json?q=%23illy","GET",array("count"=>"100"));
 
 //連想配列
 $data = json_decode($req,true);
+
+
 
 if (!empty($data)){
 
@@ -153,6 +147,11 @@ if (!empty($data)){
 		}
 	}
 }
+
+
+
+
+
 
 
 ?>

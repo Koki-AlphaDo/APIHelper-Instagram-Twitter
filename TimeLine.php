@@ -3,13 +3,9 @@
 require_once("TimeLine.php");
 
 	$client_id = "22a42bccbe47470cb221d7024a2eccd9";
-    $redirect_uri = "http://localhost.sub/Ado-Project/illy WEB/illy Now/callback.php";
+    $redirect_uri = "http://localhost.sub/Ado-Project/illy-WEB/illy-Now/callback.php";
 
     header("Location: https://api.instagram.com/oauth/authorize/?client_id=".$client_id."&redirect_uri=".$redirect_uri."&response_type=code");
-
-
-
-
 
 
 
