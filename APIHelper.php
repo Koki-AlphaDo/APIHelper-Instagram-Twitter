@@ -36,14 +36,7 @@ class APIHelper{
 		curl_close($ch);
 		 
 		$instagram_access_token = $json->access_token;
-//		$_SESSION["insta_access_token"] = $json->access_token;
-		 
-	//    echo "access_token=".$json->access_token."<br>";
-	//    echo "username=".$json->user->username."<br>";
-	//    echo "profile_picture=".$json->user->profile_picture."<br>";
-	//    echo "id=".$json->user->id."<br>";
-	//    echo "full_name=".$json->user->full_name."<br>";
-		
+
 		$instaJson = file_get_contents("https://api.instagram.com/v1/tags/illy/media/recent?access_token=".$instagram_access_token);
 		return $instaJson;
 	}
