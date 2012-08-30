@@ -1,22 +1,6 @@
 <?php
 require_once("twitteroauth.php");
 
-$helper = new APIHelper();
-
-/*
-
-$consumer_key = "jhDxtTtBWJzHRK1Y7arA";
-// Consumer secretの値
-$consumer_secret = "G7B1EM6Uby8ct9PTzHmOLpKb5yQ78V7tAlp1CWsTZI";
-// Access Tokenの値
-$access_token = "477731470-AbVgHKFW1en4G9rO6ylCxelS95tPlhxDzRPwV3eh";
-// Access Token Secretの値
-$access_token_secret = "XnJoBpivzeo59ftPHUxceZdgyg1GhYl9zuf4nMogZk";
-
-*/
-$json = $helper->getTwitterTimeLine("jhDxtTtBWJzHRK1Y7arA","G7B1EM6Uby8ct9PTzHmOLpKb5yQ78V7tAlp1CWsTZI","477731470-AbVgHKFW1en4G9rO6ylCxelS95tPlhxDzRPwV3eh","XnJoBpivzeo59ftPHUxceZdgyg1GhYl9zuf4nMogZk","NHK");
-echo $json;
-
 class APIHelper{
 
 	function getTwitterTimeLine($consumer_key,
@@ -33,16 +17,38 @@ class APIHelper{
 	}	
 	
 	
-	
 	function getInstagram($client_id, $redirect_uri, $tag){
+	    $client_id = "22a42bccbe47470cb221d7024a2eccd9";
+		$client_secret = "2c4370963ae14ae2a655fc2bb95cc171";
+		$redirect_uri = "http://localhost.sub/Ado-Project/illy-WEB/illy-Now/callback.php";
+		$token_uri = 'https://api.instagram.com/oauth/access_token';
 	
+		$post = "client_id=".$client_id."&client_secret=".$client_secret."&grant_type=authorization_code&redirect_uri=".				$redirect_uri."&code=".$_GET["code"];
+		 
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $token_uri);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		 
+		$json = json_decode(curl_exec($ch));
+		curl_close($ch);
+		 
+		$instagram_access_token = $json->access_token;
+//		$_SESSION["insta_access_token"] = $json->access_token;
+		 
+	//    echo "access_token=".$json->access_token."<br>";
+	//    echo "username=".$json->user->username."<br>";
+	//    echo "profile_picture=".$json->user->profile_picture."<br>";
+	//    echo "id=".$json->user->id."<br>";
+	//    echo "full_name=".$json->user->full_name."<br>";
+		
+		$instaJson = file_get_contents("https://api.instagram.com/v1/tags/illy/media/recent?access_token=".$instagram_access_token);
+		return $instaJson;
 	}
 	
 	
 }
-
-
-
-
 
 ?>
