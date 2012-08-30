@@ -17,13 +17,14 @@ class APIHelper{
 	}	
 	
 	
-	function getInstagram($client_id, $redirect_uri, $tag){
-	    $client_id = "22a42bccbe47470cb221d7024a2eccd9";
-		$client_secret = "2c4370963ae14ae2a655fc2bb95cc171";
-		$redirect_uri = "http://localhost.sub/Ado-Project/illy-WEB/illy-Now/callback.php";
+	function getInstagram($client_id, $redirect_uri,$redirect_uri,$tag){
+//	    $client_id = "client id";
+//		$client_secret = "client secret";
+//		$redirect_uri = "http://xxx/yyy/zzz.php";
+
 		$token_uri = 'https://api.instagram.com/oauth/access_token';
 	
-		$post = "client_id=".$client_id."&client_secret=".$client_secret."&grant_type=authorization_code&redirect_uri=".				$redirect_uri."&code=".$_GET["code"];
+		$post = "client_id=".$client_id."&client_secret=".$client_secret."&grant_type=authorization_code&redirect_uri=".$redirect_uri."&code=".$_GET["code"];
 		 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $token_uri);
